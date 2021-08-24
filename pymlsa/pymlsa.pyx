@@ -2,12 +2,7 @@ import numpy as np
 cimport numpy as np
 cimport cython
 from libc.stdlib cimport malloc, free
-
-#from cython.view cimport array as cyarray
 from libc.string cimport memcpy, memset
-#from libc.math cimport log, M_PI, sin, cos, atan
-#from libc.float cimport DBL_MAX
-
 from cpython cimport PyObject, Py_INCREF, Py_DECREF
 
 
