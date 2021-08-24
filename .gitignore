@@ -1,0 +1,12 @@
+.ipynb_checkpoints/
+__pycache__/
+.DS_STORE
+.DS_Store
+._*
+
+build/
+dist/
+*.egg-info/
+
+*/pymlsa.cpp
+
