@@ -153,6 +153,7 @@ cdef class MLSAFilter(object):
 class Synthesizer(object):        
     def __init__(self, order, alpha, pade_order):
         self.alpha = alpha
+        self.order = order
         self.prev_coef = np.zeros((order, ), dtype=np.dtype('float64'))
         self.cur_coef = np.zeros((order, ), dtype=np.dtype('float64'))
 
@@ -162,12 +163,12 @@ class Synthesizer(object):
     def _mcep2coef(self, mcep):
         self.cur_coef[:] = mcep[:]
         for i in range(0, mcep.size - 1)[::-1]:
-            self.cur_coef[i] = self.cur_coef[i] - self.alpha * self.cur_coef[i+1]        
+            self.cur_coef[i] = self.cur_coef[i] - self.alpha * self.cur_coef[i+1]
         
         
     def __call__(self, pulse, mcep):
         self._mcep2coef(mcep)
-        #self.cur_coef[:] = mcep2coef(mcep, self.alpha)
+        
         ret = np.zeros_like(pulse)
         slope = (self.cur_coef - self.prev_coef) / len(pulse)
         for i in range(len(pulse)):
