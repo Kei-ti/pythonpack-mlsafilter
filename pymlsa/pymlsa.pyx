@@ -218,11 +218,13 @@ class Synthesizer(object):
     def __init__(self, order, alpha, pade_order):
         self.alpha = alpha
         self.order = order
-        self.prev_coef = np.zeros((order, ), dtype=np.dtype('float64'))
-        self.cur_coef = np.zeros((order, ), dtype=np.dtype('float64'))
+        self.reset_state()
 
         self.filter = MLSAFilter(order, alpha, pade_order)
 
+    def reset_state(self):
+        self.prev_coef = np.zeros((order, ), dtype=np.dtype('float64'))
+        self.cur_coef = np.zeros((order, ), dtype=np.dtype('float64'))
 
     def _mcep2coef(self, mcep):
         self.cur_coef[:] = mcep[:]
